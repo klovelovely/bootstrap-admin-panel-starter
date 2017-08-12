@@ -1,0 +1,208 @@
+/* main.scss */
+@import "override-variables";
+@import "bootstrap-custom";
+@import "bootstrap/theme";
+@import "components/layout";
+
+/**
+ * boostrap 定制
+ */
+/* global */
+body {
+    padding-top: 70px;
+}
+
+.navbar-inverse,
+.btn-primary {
+    background-image: none;
+}
+
+/* 初始化 - 全局横向导航样式 */
+.navbar-inverse {
+    .navbar-header {
+        padding: 0;
+        .navbar-brand {
+            margin: 0;
+            width: 100%;
+            text-align: center;
+            font-size: 22px;
+        }
+    }
+    .navbar-collapse {
+        @extend .col-md-10;
+    }
+}
+
+.navbar-brand {
+    background-color: #00bfce;
+}
+
+/* 初始化 - 页面框架布局 */
+@media (min-width: $screen-md) {
+    html,
+    body,
+    body > .page-content,
+    body > .page-content > .row,
+    body > .page-content > .row > .side,
+    body > .page-content > .row > .main {
+        height: 100%;
+    }
+
+    .side,
+    .main {
+        overflow-y: auto;
+    }
+}
+
+.side {
+    padding: 0;
+    background-color: $navbar-inverse-bg;
+    color: #eee;
+}
+
+/**
+ * 初始化具体组件
+ */
+
+// Collapsible panels (aka, accordion)
+//
+// Wrap a series of panels in `.panel-group` to turn them into an accordion with
+// the help of our collapse JavaScript plugin.
+.panel-group {
+    margin-bottom: 0;
+
+    // Tighten up margin so it's only between panels
+    .panel {
+        margin-bottom: 0;
+        border: 0;
+        border-bottom: 1px solid rgba(255, 255, 255, .1);
+        border-radius: 0;
+        background-color: transparent;
+
+        + .panel {
+            margin-top: 0;
+        }
+    }
+
+    .panel-heading {
+        padding: 0;
+        border: 0;
+        border-radius: 0;
+        background-image: none;
+        background-color: $navbar-inverse-bg;
+        color: #fff;
+
+        .panel-title {
+            text-align: center;
+            font-size: 18px;
+            font-weight: normal;
+            height: 48px;
+            line-height: 48px;
+            a {
+                display: block;
+                text-decoration: none;
+                .glyphicon {
+                    transform: scale(.5);
+                }
+            }
+        }
+
+        + .panel-collapse > .panel-body,
+        + .panel-collapse > .list-group {
+
+        }
+        + .panel-collapse > .list-group {
+            border: 0;
+            border-radius: 0;
+            text-align: center;
+            .list-group-item {
+                padding: 18px;
+                font-size: 16px;
+                border: 0;
+                border-radius: 0;
+                background-color: darken($navbar-inverse-bg, 10%);
+                color: #eee;
+                &.active {
+                    background-image: none;
+                    background-color: darken($navbar-inverse-bg, 20%);
+                    color: #fff;
+                    text-shadow: none;
+                    a {
+                        color: #fff;
+                    }
+                }
+                a {
+                    display: block;
+                    text-decoration: none;
+                    color: #808080;
+                }
+            }
+            &:last-child {
+                .list-group-item:last-child {
+                    border: 0;
+                    border-radius: 0;
+                }
+            }
+        }
+    }
+
+    .panel-footer {
+        border-top: 0;
+        + .panel-collapse .panel-body {
+            border-bottom: 0;
+        }
+    }
+}
+
+// Navbar nav links
+//
+// Builds on top of the `.nav` components with its own modifier class to make
+// the nav the full height of the horizontal nav (above 768px).
+.navbar-nav {
+    margin: ($navbar-padding-vertical / 2) (-$navbar-padding-horizontal);
+
+    > li > a {
+        padding-top: 10px;
+        padding-bottom: 10px;
+        line-height: $line-height-computed;
+    }
+
+    @media (max-width: $grid-float-breakpoint-max) {
+        // Dropdowns get custom display when collapsed
+        .open .dropdown-menu {
+            position: static;
+            float: none;
+            width: auto;
+            margin-top: 0;
+            background-color: transparent;
+            border: 0;
+            box-shadow: none;
+            > li > a,
+            .dropdown-header {
+                padding: 5px 15px 5px 25px;
+            }
+            > li > a {
+                line-height: $line-height-computed;
+                &:hover,
+                &:focus {
+                    background-image: none;
+                }
+            }
+        }
+    }
+
+    // Uncollapse the nav
+    @media (min-width: $grid-float-breakpoint) {
+        float: left;
+        margin: 0;
+
+        > li {
+            float: left;
+            > a {
+                padding-top: $navbar-padding-vertical;
+                padding-bottom: $navbar-padding-vertical;
+            }
+        }
+    }
+}
+
